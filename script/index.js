@@ -2,6 +2,11 @@ const createElements=(arr)=>{
     const htmlElements=arr.map(el => `<span class="btn">${el}</span>`)
     return htmlElements.join(" ");
 }
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
 
 const manageSpinner=(status)=>{
   if(status==true){
@@ -117,7 +122,7 @@ words.forEach(word=>{
 <div class="font-bold text-2xl font-bangla">${word.meaning ?word.meaning:"অর্থ পাওয়া যায়নি"} /${word.pronunciation?word.pronunciation :"pronunciation পাওয়া যায়নি"}</div>
 <div class="flex justify-between items-center">
   <button  onclick="loadWordDetail(${word.id})" class="btn bg-[rgba(26,145,255,0.1)] hover:bg-[rgba(26,145,255,0.8)]"><i class="fa-solid fa-circle-info"></i></button>
-  <button class="btn bg-[rgba(26,145,255,0.1)] hover:bg-[rgba(26,145,255,0.8)]"><i class="fa-solid fa-volume-high"></i></i></button>
+  <button onclick="pronounceWord('${word.word}')" class="btn bg-[rgba(26,145,255,0.1)] hover:bg-[rgba(26,145,255,0.8)]"><i class="fa-solid fa-volume-high"></i></i></button>
 </div>
       </div>
     `
